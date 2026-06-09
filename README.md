@@ -2,6 +2,20 @@
 
 Aplicação fullstack para geração de currículos em PDF. O usuário preenche um formulário no app mobile (Ionic/Angular), os dados são enviados para a API .NET que salva no banco e retorna o PDF gerado com QuestPDF.
 
+🔗 **Demo ao vivo:** [curriculos.bycodeai.shop](https://curriculos.bycodeai.shop/)
+
+---
+
+## Screenshots
+
+| Passo 1 — Informações Pessoais | Passo 2 — Endereço |
+|:---:|:---:|
+| ![Informações Pessoais](step1-informacoes.png) | ![Endereço](step2-endereco.png) |
+
+| Passo 3 — Formação e Cursos | Passo 4 — Experiência |
+|:---:|:---:|
+| ![Formação e Cursos](step3-formacao.png) | ![Experiência](step4-experiencia.png) |
+
 ---
 
 ## Stack
