@@ -1,0 +1,319 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Currículo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Currículo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form (ngSubmit)="salvarPdf()">
+    <div class="controles-etapa">
+      <input type="radio" id="etapa-1" name="etapa" checked />
+      <input type="radio" id="etapa-2" name="etapa" />
+      <input type="radio" id="etapa-3" name="etapa" />
+      <input type="radio" id="etapa-4" name="etapa" />
+
+      <section class="form-etapa etapa-1">
+        <div class="etapa-header">
+          <span>Passo 1 de 4</span>
+          <span>Informações Pessoais</span>
+        </div>
+
+        <div class="container-nome-foto">
+  <ion-item class="campo-nome">
+    <ion-label position="floating">Nome</ion-label>
+    <ion-input type="text" [(ngModel)]="curriculo.informacao.nome" name="nome"></ion-input>
+  </ion-item>
+
+  <ion-item class="botao-foto" lines="none" button (click)="adicionarFoto()">
+    <ion-img *ngIf="curriculo.informacao.foto" [src]="curriculo.informacao.foto"></ion-img>
+    
+    <div class="icone-wrapper" *ngIf="!curriculo.informacao.foto">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#bbbbbb" stroke-width="1.8">
+        <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+    </div>
+  </ion-item>
+</div>
+
+
+        <ion-item>
+          <ion-label position="floating">Idade</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="curriculo.informacao.idade"
+            name="idade"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Telefone</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="curriculo.informacao.telefone"
+            name="telefone"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Relacionamento</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="curriculo.informacao.relacionamento"
+            name="relacionamento"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input
+            type="email"
+            [(ngModel)]="curriculo.informacao.email"
+            name="email"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Objetivo</ion-label>
+          <ion-textarea
+            [(ngModel)]="curriculo.informacao.objetivo"
+            name="objetivo"
+          ></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Perfil</ion-label>
+          <ion-textarea
+            [(ngModel)]="curriculo.informacao.perfil"
+            name="perfil"
+          ></ion-textarea>
+        </ion-item>
+
+        <div class="acoes-etapa">
+          <label for="etapa-2" class="acao-etapa proxima-etapa">Avançar</label>
+        </div>
+      </section>
+
+      <section class="form-etapa etapa-2">
+        <div class="etapa-header">
+          <span>Passo 2 de 4</span>
+          <span>Endereço</span>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating">Rua</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="curriculo.endereco.rua"
+            name="rua"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Número</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="curriculo.endereco.numero"
+            name="numero"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Bairro</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="curriculo.endereco.bairro"
+            name="bairro"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Cidade</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="curriculo.endereco.cidade"
+            name="cidade"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Estado</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="curriculo.endereco.estado"
+            name="estado"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">CEP</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="curriculo.endereco.cep"
+            name="cep"
+          ></ion-input>
+        </ion-item>
+
+        <div class="acoes-etapa">
+          <label for="etapa-1" class="acao-etapa etapa-prev">Voltar</label>
+          <label for="etapa-3" class="acao-etapa proxima-etapa">Avançar</label>
+        </div>
+      </section>
+
+      <section class="form-etapa etapa-3">
+        <div class="etapa-header">
+          <span>Passo 3 de 4</span>
+          <span>Formação e Cursos</span>
+        </div>
+
+        <div
+          *ngFor="let formacao of curriculo.formacoes; let i = index"
+          class="bloco-dinamico"
+        >
+          <ion-item>
+            <ion-label position="floating">Curso</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="formacao.curso"
+              name="curso{{i}}"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Instituição</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="formacao.instituicao"
+              name="instituicao{{i}}"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Ano de Conclusão</ion-label>
+            <ion-input
+              type="number"
+              [(ngModel)]="formacao.anoConclusao"
+              name="anoConclusao{{i}}"
+            ></ion-input>
+          </ion-item>
+        </div>
+        <ion-button fill="outline" expand="block" (click)="adicionarFormacao()"
+          >+ Adicionar Formação</ion-button
+        >
+
+        <div
+          *ngFor="let curso of curriculo.cursos; let i = index"
+          class="bloco-dinamico"
+        >
+          <ion-item>
+            <ion-label position="floating">Nome do Curso</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="curso.nomeCurso"
+              name="nomeCurso{{i}}"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Instituição do Curso</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="curso.instituicaoCurso"
+              name="instituicaoCurso{{i}}"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Ano de Conclusão do Curso</ion-label>
+            <ion-input
+              type="number"
+              [(ngModel)]="curso.anoConclusaoCurso"
+              name="anoConclusaoCurso{{i}}"
+            ></ion-input>
+          </ion-item>
+        </div>
+        <ion-button fill="outline" expand="block" (click)="adicionarCurso()"
+          >+ Adicionar Curso</ion-button
+        >
+
+        <div class="acoes-etapa">
+          <label for="etapa-2" class="acao-etapa etapa-prev">Voltar</label>
+          <label for="etapa-4" class="acao-etapa proxima-etapa">Avançar</label>
+        </div>
+      </section>
+
+      <section class="form-etapa etapa-4">
+        <div class="etapa-header">
+          <span>Passo 4 de 4</span>
+          <span>Experiência</span>
+        </div>
+
+        <div
+          *ngFor="let exp of curriculo.experiencias; let i = index"
+          class="bloco-dinamico"
+        >
+          <ion-item>
+            <ion-label position="floating">Empresa</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="exp.empresa"
+              name="empresa{{i}}"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Cargo</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="exp.cargo"
+              name="cargo{{i}}"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Ano de Início</ion-label>
+            <ion-input
+              type="number"
+              [(ngModel)]="exp.anoInicio"
+              name="anoInicio{{i}}"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Ano de Fim</ion-label>
+            <ion-input
+              type="number"
+              [(ngModel)]="exp.anoFim"
+              name="anoFim{{i}}"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Atividades</ion-label>
+            <ion-textarea
+              [(ngModel)]="exp.atividades"
+              name="atividades{{i}}"
+            ></ion-textarea>
+          </ion-item>
+        </div>
+        <ion-button
+          fill="outline"
+          expand="block"
+          (click)="adicionarExperiencia()"
+          >+ Adicionar Experiência</ion-button
+        >
+
+        <div class="acoes-etapa">
+          <label for="etapa-3" class="acao-etapa etapa-prev">Voltar</label>
+          <ion-button type="submit" expand="full">Salvar Currículo</ion-button>
+        </div>
+      </section>
+    </div>
+  </form>
+</ion-content>
